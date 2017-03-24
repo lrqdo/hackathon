@@ -1,0 +1,91 @@
+<html>
+<head>
+<style>
+            @font-face {
+			    font-family: 'League Gothic';
+			    font-style: normal;
+			    font-weight: normal;
+			    src: url('https://laruchequiditoui.fr/fr/p/assets/fonts/League_Gothic-webfont.eot') format('embedded-opentype'),
+			         url('https://laruchequiditoui.fr/fr/p/assets/fonts/League_Gothic-webfont.woff') format('woff'),
+			         url('https://laruchequiditoui.fr/fr/p/assets/fonts/League_Gothic-webfont.ttf') format('truetype'),
+			         url('https://laruchequiditoui.fr/fr/p/assets/fonts/League_Gothic-webfont.svg#LeagueGothicRegular') format('svg');
+			}
+            body {
+                font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+                background-color: #056E7D;
+                
+            }
+            .end {
+                background-color: #F16531;
+            }
+            .nearly {
+                background-color: #FFD000;
+            }
+            #counter {
+                margin-top: 10%;
+                color:#ffffff;
+                text-align:center;
+                font-weight: normal;
+                font-size: 9em;
+                font-family: "League Gothic", "Segoe UI", Helvetica;
+                text-align: center;
+            }
+            #counter span {
+                font-size: 2.5em;
+            }
+            img {
+            	width: 25%;
+            }
+</style>
+</head>
+<body>
+<p id="counter">
+    <span id="minutes">0</span>MIN <span id="seconds">0</span>SEC
+</p>
+
+<p align="center"><img src="logo-FR-white.svg"/></p>
+
+</body>
+<script>
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+    .substr(1)
+        .split("&")
+        .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
+}
+
+var counterp = document.getElementById('counter');
+var minuteSpan = document.getElementById('minutes');
+var secondSpan = document.getElementById('seconds');
+var seconds = findGetParameter('seconds');
+var minutes = Math.floor(seconds / 60);
+secondSpan.innerHTML = seconds % 60;
+minuteSpan.innerHTML = minutes;
+
+function decrement() {
+    seconds --;
+    if (seconds > -1) {
+    	minutes = Math.floor(seconds / 60);
+    	secondSpan.innerHTML = seconds % 60;
+    	minuteSpan.innerHTML = minutes;
+    	if (seconds < 30) {
+    		document.body.className = "nearly";
+    	}
+    } else {
+    	counter.innerHTML = "<span>THE END</span>";
+    	document.body.className = "end";
+    }
+  }
+
+  
+   
+ 
+intervalID = setInterval(decrement, 1000);
+</script>
+</html>
